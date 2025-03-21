@@ -2,6 +2,9 @@
 A SQL-based logistics and parcel tracking database management system.
 <br>
 📝 Author: Niranjan Gole
+<br>
+LinkedIn: https://www.linkedin.com/in/niranjan-gole-03b987210/
+<br>
 📅 Created in: 2025
 🔗 Project Type: SQL Database
 
