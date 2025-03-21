@@ -1,46 +1,86 @@
-# Parcel-Tracking-DB
-A SQL-based logistics and parcel tracking database management system.
-<br>
-📝 Author: Niranjan Gole
-<br>
-LinkedIn: https://www.linkedin.com/in/niranjan-gole-03b987210/
-<br>
-📅 Created in: 2025
-🔗 Project Type: SQL Database
+# 📦 Parcel Track DB
 
-## 📖 Project Overview
-Parcel-Tracking-DB is a structured database designed to manage logistics, shipments, packages, couriers, and tracking history. It provides a robust foundation for parcel tracking systems.
+## 👤 Author
+**Niranjan Gole**  
+LinkedIn: (https://www.linkedin.com/in/niranjan-gole-03b987210/)  
+GitHub: (https://github.com/Niranjan2830)
 
-## 🚀 Features
-- Stores customer, shipment, and package details.
-- Manages courier and warehouse information.
-- Tracks package movements and payment records.
-- Provides useful SQL queries for reporting and analysis.
+## Overview
+Parcel Track DB is a database management system designed for tracking parcels and shipments efficiently. It helps customers monitor their shipments, track their movement, and view package details. This project was developed entirely using SQL with no additional programming languages.
 
-## 📂 Files in This Repository
-- **Schema.sql** → Contains all `CREATE TABLE` statements with explanations.
-- **SeedData.sql** → Preloaded sample data (`INSERT INTO` statements) for testing.
-- **Queries.sql** → Frequently used queries for tracking shipments, payments, etc.
+## 🗂 Key Tables & Entities
 
-## 🏗 Database Schema
-The database consists of the following tables:
-1. **Customers** – Stores customer details.
-2. **Shipments** – Contains tracking numbers, source, destination, and delivery status.
-3. **Packages** – Details of each package in a shipment (weight, size, type).
-4. **Couriers** – Information about delivery personnel handling shipments.
-5. **Warehouse** – Storage locations for packages in transit.
-6. **Tracking_History** – Logs each scan or movement of a package.
-7. **Payments** – Records payments for shipping services.
+### 1. Customers Table 🏠
+Stores customer details.
+- **Primary Key:** Customer ID
+- **Key Attributes:** Name, Email, Phone, Address, Registered Date
 
-## 🔧 How to Use
-1. **Set up the database**  
-   - Run `Schema.sql` to create the tables.  
-   - Run `SeedData.sql` to insert sample data.  
+### 2. Shipments Table 📦
+Stores parcel shipment details.
+- **Primary Key:** Shipment ID
+- **Foreign Key:** Customer ID (References Customers)
+- **Key Attributes:** Tracking Number, Source Location, Destination Location, Status, Shipped Date, Expected Delivery Date
 
-2. **Execute sample queries**  
-   - Use `Queries.sql` to test and analyze parcel tracking data.
+### 3. Packages Table 📂
+Stores package details within shipments.
+- **Primary Key:** Package ID
+- **Foreign Key:** Shipment ID (References Shipments)
+- **Key Attributes:** Weight, Dimensions, Package Type, Contents
 
-## 📊 Example Query
-To find all shipments that are currently "In Transit":
-```sql
-SELECT * FROM Shipments WHERE DeliveryStatus = 'In Transit';
+### 4. Tracking History Table 🚚
+Logs each scan or movement of a shipment.
+- **Primary Key:** Tracking ID
+- **Foreign Key:** Shipment ID (References Shipments)
+- **Key Attributes:** Status, Location, Updated Time
+
+## 🔗 Relationships Between Tables
+- **One-to-Many:** A Customer can have multiple Shipments.
+- **One-to-Many:** A Shipment can contain multiple Packages.
+- **One-to-Many:** A Shipment can have multiple Tracking History entries.
+
+## 🚀 Key Features
+- **End-to-End Parcel Tracking:** Customers can track shipments using unique tracking numbers.
+- **Shipment Status Updates:** Every shipment movement is logged in Tracking History.
+- **Package-Level Details:** Each shipment can contain multiple packages with different sizes and weights.
+- **Customer-Based Shipment Management:** Customers can view all their shipments with delivery statuses.
+
+## 🔧 Installation
+To set up the database:
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Niranjan2830/Parcel-Tracking-DB.git
+   ```
+2. Open MySQL and create the database:
+   ```sql
+   CREATE DATABASE ParcelTrackDB;
+   USE ParcelTrackDB;
+   ```
+3. Import the SQL script:
+   ```sh
+   mysql -u your_username -p ParcelTrackDB < Complete_Program.sql
+   ```
+
+## 📊 Usage Examples
+Run the following queries to interact with the database:
+
+- Get all shipments in transit:
+  ```sql
+  SELECT * FROM Shipments WHERE Status = 'In Transit';
+  ```
+- Count total shipments per customer:
+  ```sql
+  SELECT C.Name, COUNT(S.ShipmentID) AS TotalShipments 
+  FROM Customers C 
+  JOIN Shipments S ON C.CustomerID = S.CustomerID 
+  GROUP BY C.Name;
+  ```
+
+For more queries, check **Queries.sql** and **Scenarios.sql**.
+
+## 🔮 Possible Enhancements
+- **Courier Table:** Store details of delivery personnel.
+- **Warehouse Table:** Store package storage locations.
+- **Payments Table:** Manage customer payments for shipping services.
+
+
+
