@@ -1,6 +1,10 @@
 # Parcel-Tracking-DB
 A SQL-based logistics and parcel tracking database management system.
 <br>
+📝 Author: Niranjan Gole
+📅 Created in: 2025
+🔗 Project Type: SQL Database
+
 ## 📖 Project Overview
 Parcel-Tracking-DB is a structured database designed to manage logistics, shipments, packages, couriers, and tracking history. It provides a robust foundation for parcel tracking systems.
 
